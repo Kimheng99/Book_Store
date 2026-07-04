@@ -1,0 +1,144 @@
+// =====================================================
+// HỆ THỐNG QUẢN LÝ NHÀ SÁCH - Prisma Schema (PostgreSQL)
+// ⭐ ĐÃ CẬP NHẬT: enum TrangThaiSach có 5 trạng thái
+//    khớp với sơ đồ trạng thái (Hình 8)
+// =====================================================
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+
+enum ChucVu {
+  QUAN_LY
+  THU_NGAN
+  THU_KHO
+}
+
+enum LoaiGiaoDich {
+  NHAP
+  XUAT
+}
+
+// ⭐ 5 trạng thái theo state diagram Hình 8
+enum TrangThaiSach {
+  KHONG_BAN       // trạng thái ban đầu, chưa nhập về
+  CON_HANG        // sau khi nhập về
+  HET_HANG        // [bán hết]
+  TON_KHO_QUA_MUC // [không bán hết] + nhập hàng thêm
+  NGUNG_BAN       // trạng thái kết thúc
+}
+
+enum TrangThaiDonHang {
+  CHO_XU_LY
+  HOAN_THANH
+  DA_HUY
+}
+
+model NhanVien {
+  maNV    String @id @default(cuid()) @map("ma_nv")
+  matKhau String @map("mat_khau")
+  hoTen   String @map("ho_ten")
+  chucVu  ChucVu @map("chuc_vu")
+
+  giaoDichKho GiaoDichKho[]
+  donHang     DonHang[]
+
+  @@map("nhan_vien")
+}
+
+model KhoHang {
+  maKho  String  @id @default(cuid()) @map("ma_kho")
+  tenKho String  @map("ten_kho")
+  diaChi String  @map("dia_chi")
+  sdt    String? @map("sdt")
+
+  giaoDichKho GiaoDichKho[]
+  tonKho      TonKho[]
+
+  @@map("kho_hang")
+}
+
+model Sach {
+  maSach    String        @id @default(cuid()) @map("ma_sach")
+  tenSach   String        @map("ten_sach")
+  tacGia    String        @map("tac_gia")
+  nxb       String        @map("nxb")
+  giaNhap   Decimal       @map("gia_nhap") @db.Decimal(12, 2)
+  giaSach   Decimal       @map("gia_sach") @db.Decimal(12, 2)
+  trangThai TrangThaiSach @default(KHONG_BAN) @map("trang_thai")
+  anhBia    String?       @map("anh_bia") // đường dẫn ảnh bìa (upload)
+
+  giaoDichKho    GiaoDichKho[]
+  tonKho         TonKho[]
+  chiTietDonHang ChiTietDonHang[]
+
+  @@map("sach")
+}
+
+model GiaoDichKho {
+  maGD     String       @id @default(cuid()) @map("ma_gd")
+  maKho    String       @map("ma_kho")
+  maSach   String       @map("ma_sach")
+  maNV     String       @map("ma_nv")
+  loaiGD   LoaiGiaoDich @map("loai_gd")
+  thoiGian DateTime     @default(now()) @map("thoi_gian")
+  soLuong  Int          @map("so_luong")
+  ghiChu   String?      @map("ghi_chu")
+
+  khoHang  KhoHang  @relation(fields: [maKho], references: [maKho])
+  sach     Sach     @relation(fields: [maSach], references: [maSach])
+  nhanVien NhanVien @relation(fields: [maNV], references: [maNV])
+
+  @@index([maKho])
+  @@index([maSach])
+  @@index([thoiGian])
+  @@map("giao_dich_kho")
+}
+
+model TonKho {
+  maKho     String  @map("ma_kho")
+  maSach    String  @map("ma_sach")
+  soLuong   Int     @default(0) @map("so_luong")
+  viTriKe   String? @map("vi_tri_ke")
+  nguongMin Int     @default(0) @map("nguong_min")
+  nguongMax Int     @default(0) @map("nguong_max")
+
+  khoHang KhoHang @relation(fields: [maKho], references: [maKho])
+  sach    Sach    @relation(fields: [maSach], references: [maSach])
+
+  @@id([maKho, maSach])
+  @@map("ton_kho")
+}
+
+model DonHang {
+  maDH      String           @id @default(cuid()) @map("ma_dh")
+  maNV      String           @map("ma_nv")
+  ngayTao   DateTime         @default(now()) @map("ngay_tao")
+  tongTien  Decimal          @default(0) @map("tong_tien") @db.Decimal(14, 2)
+  trangThai TrangThaiDonHang @default(CHO_XU_LY) @map("trang_thai")
+
+  nhanVien NhanVien         @relation(fields: [maNV], references: [maNV])
+  chiTiet  ChiTietDonHang[]
+
+  @@index([ngayTao])
+  @@map("don_hang")
+}
+
+model ChiTietDonHang {
+  maDH    String  @map("ma_dh")
+  maSach  String  @map("ma_sach")
+  soLuong Int     @map("so_luong")
+  donGia  Decimal @map("don_gia") @db.Decimal(12, 2)
+
+  donHang DonHang @relation(fields: [maDH], references: [maDH], onDelete: Cascade)
+  sach    Sach    @relation(fields: [maSach], references: [maSach])
+
+  @@id([maDH, maSach])
+  @@map("chi_tiet_don_hang")
+}

@@ -1,0 +1,256 @@
+/* ===== Design tokens — nền sáng tinh tế, primary tím-indigo hiện đại ===== */
+:root {
+  --bg: #eceef1;
+  --surface: #ffffff;
+  --surface-2: #f6f7fb;
+  --border: #e6e8f1;
+  --text: #1b1f31;
+  --muted: #6b7186;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --primary-soft: #eef0fe;
+  --success: #28a745;
+  --danger: #e5484d;
+  --warning: #f0a500;
+  --purple: #8b5cf6;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 6px 20px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 16px 40px rgba(16, 24, 40, 0.16);
+  --mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  /* Nền xám nhẹ, dịu mắt */
+  background: linear-gradient(180deg, #f3f4f6 0%, #e6e8ec 100%) var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-size: 15px;
+  min-height: 100vh;
+}
+
+/* ===== Layout ===== */
+.topbar {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  border-bottom: 1px solid #9c2530;
+  box-shadow: 0 2px 12px rgba(176, 42, 55, 0.25);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  font-weight: 800; font-size: 17px; padding: 16px 0;
+  color: #fff;
+}
+.nav { display: flex; gap: 4px; }
+.nav button {
+  border: none; background: none; cursor: pointer;
+  padding: 18px 16px; font: inherit; font-weight: 500; color: rgba(255, 255, 255, 0.78);
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.nav button:hover { color: #fff; }
+.nav button.active { color: #fff; border-bottom-color: #fff; }
+.page { max-width: 1080px; margin: 0 auto; padding: 24px; }
+.page h2 { margin: 0 0 16px; font-size: 20px; }
+.page h3 { margin: 24px 0 12px; font-size: 16px; }
+
+/* ===== Cards ===== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--muted);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.stat .value { font-size: 24px; font-weight: 700; font-family: var(--mono); }
+.stat .label { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.stat.green { border-top-color: var(--success); }
+.stat.red { border-top-color: var(--danger); }
+.stat.yellow { border-top-color: var(--warning); }
+.stat.blue { border-top-color: var(--primary); }
+.stat.purple { border-top-color: var(--purple); }
+
+/* ===== Table ===== */
+table { width: 100%; border-collapse: collapse; background: var(--surface); }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); }
+th { background: var(--surface-2); color: var(--muted); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.4px; }
+tbody tr { transition: background 0.12s ease; }
+tbody tr:hover { background: var(--surface-2); }
+.table-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.mono { font-family: var(--mono); font-size: 13.5px; }
+
+/* ===== Badges — trạng thái sách theo state machine ===== */
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+}
+.badge.green { background: #e6f6ea; color: #1b7a34; }
+.badge.red { background: #fdeaea; color: #b02a37; }
+.badge.yellow { background: #fdf3d7; color: #9a6b00; }
+.badge.gray { background: #eef1f5; color: #5b6472; }
+
+/* ===== Buttons ===== */
+.btn {
+  border: none; border-radius: 9px; padding: 8px 15px;
+  font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  color: #fff; background: linear-gradient(135deg, #6366f1, var(--primary));
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28);
+  transition: filter 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: translateY(1px); }
+.btn.green { background: linear-gradient(135deg, #35c95d, #1f9e46); box-shadow: 0 2px 8px rgba(40, 167, 69, 0.28); }
+.btn.red { background: linear-gradient(135deg, #f16d72, var(--danger)); box-shadow: 0 2px 8px rgba(229, 72, 77, 0.28); }
+.btn.gray { background: linear-gradient(135deg, #949cab, #6b7280); box-shadow: none; }
+.btn.sm { padding: 5px 11px; font-size: 12.5px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+/* ===== Forms ===== */
+label { display: block; font-weight: 600; font-size: 13.5px; margin: 12px 0 5px; }
+input, select {
+  width: 100%; padding: 9px 12px; font: inherit; font-size: 14px;
+  border: 1px solid var(--border); border-radius: 9px; background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+input:focus, select:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.form-actions { display: flex; gap: 10px; margin-top: 18px; }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ===== Tabs con (trang doanh thu / đơn hàng) ===== */
+.subtabs {
+  display: flex; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 18px; box-shadow: var(--shadow);
+}
+.subtabs button {
+  flex: 1; border: none; background: none; padding: 12px; font: inherit;
+  font-weight: 500; color: var(--muted); cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.subtabs button:last-child { border-right: none; }
+.subtabs button:hover { background: var(--surface-2); }
+.subtabs button.active { background: linear-gradient(135deg, #6366f1, var(--primary)); color: #fff; }
+
+/* ===== Bộ lọc thời gian ===== */
+.filter {
+  background: var(--primary-soft); border-left: 4px solid var(--primary);
+  border-radius: 10px; padding: 14px 18px 18px; margin-bottom: 18px;
+}
+.filter .title { font-weight: 600; margin-bottom: 4px; }
+.filter-row { display: flex; gap: 14px; align-items: end; flex-wrap: wrap; }
+.filter-row > div { flex: 1; min-width: 160px; }
+
+/* ===== Grid thẻ sách / đơn hàng ===== */
+.grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.book-card, .order-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.book-card:hover, .order-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.book-card .price, .order-card .total { color: var(--danger); font-weight: 700; font-family: var(--mono); }
+.book-card .meta, .order-card .meta { color: var(--muted); font-size: 13px; margin: 3px 0 10px; }
+.card-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+/* ===== Danh sách xếp hạng / nhân viên ===== */
+.rank-list { display: flex; flex-direction: column; }
+.rank-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface); border-bottom: 1px solid var(--border); padding: 13px 16px;
+  transition: background 0.12s ease;
+}
+.rank-item:hover { background: var(--surface-2); }
+.rank-item:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+.rank-item:last-child { border-radius: 0 0 var(--radius) var(--radius); border-bottom: none; }
+.rank-list { border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.rank-num {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #6366f1, var(--primary)); color: #fff; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.rank-body { flex: 1; }
+.rank-body .sub { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+.rank-money { font-family: var(--mono); font-weight: 700; color: var(--success); }
+
+/* ===== Modal ===== */
+.overlay {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; z-index: 50; padding: 20px;
+}
+.modal {
+  background: var(--surface); border-radius: 14px; padding: 24px;
+  width: 100%; max-width: 480px; max-height: 85vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+.modal h3 { margin: 0 0 16px; display: flex; justify-content: space-between; }
+.modal .close { border: none; background: none; font-size: 20px; cursor: pointer; color: var(--muted); }
+.kv { display: grid; grid-template-columns: 140px 1fr; gap: 6px 12px; font-size: 14px; }
+.kv .k { font-weight: 600; }
+
+/* ===== Thông báo ===== */
+.alert { padding: 11px 16px; border-radius: 10px; margin: 12px 0; font-size: 14px; }
+.alert.err { background: #fdeaea; color: #b02a37; }
+.alert.ok { background: #e6f6ea; color: #1b7a34; }
+.empty { text-align: center; color: var(--muted); padding: 36px 0; }
+
+/* ===== Ảnh bìa sách ===== */
+.book-thumb {
+  width: 40px; height: 56px; object-fit: cover; border-radius: 6px;
+  border: 1px solid var(--border); background: #f1f5f9; display: block;
+}
+.book-thumb.placeholder {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--muted);
+}
+.book-cover {
+  max-width: 160px; max-height: 220px; object-fit: cover;
+  border-radius: 10px; border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+
+/* ===== Ảnh trong thẻ sách (Danh sách sách hiện có) ===== */
+.book-card-media { text-align: center; margin-bottom: 10px; }
+.book-card-img {
+  width: 100%; height: 150px; object-fit: cover;
+  border-radius: 10px; border: 1px solid var(--border); background: #f1f5f9; display: block;
+}
+.book-card-img.placeholder {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; color: var(--muted);
+}
+
+/* ===== SweetAlert2 — đồng bộ với giao diện app ===== */
+.swal-app {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+.swal-app .swal2-title { color: var(--text); font-size: 20px; }
+.swal-app .swal2-html-container { color: var(--muted); }
+/* Nút dùng chung class .btn của app → tự có gradient, bo góc, bóng đổ.
+   Chỉ cần thêm khoảng cách giữa các nút. */
+.swal-app .swal2-actions { gap: 10px; }
+.swal-app .swal2-actions .btn { margin: 0; }
+.swal-toast { padding: 10px 14px; }
+.swal-toast .swal2-title { font-size: 15px; }
