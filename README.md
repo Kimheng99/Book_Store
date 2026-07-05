@@ -297,23 +297,7 @@ npx tsx prisma/seed-nv.ts
 
 ---
 
-# Lưu ý
 
-- **Không** upload file `Backend/.env` lên GitHub.
-- Thêm `.env` vào file `.gitignore`.
-- Ảnh bìa sách được lưu tại:
-
-```text
-Backend/uploads/
-```
-
-Có thể truy cập ảnh qua đường dẫn:
-
-```text
-/uploads/filename
-```
-
----
 
 # Tác giả
 
