@@ -1,92 +1,92 @@
-# 📚 Bookstore Management System
+# Hệ thống Quản lý Nhà sách
 
-A simple **Bookstore Management System** with a **Backend REST API** and a **Frontend Web Application**.
+Một **Hệ thống Quản lý Nhà sách** đơn giản gồm **Backend REST API** và **Ứng dụng Web Frontend**.
 
-The system allows users to manage:
+Hệ thống cho phép người dùng quản lý:
 
-- 📖 Books
-- 📦 Inventory
-- 🛒 Orders (Book Sales)
-- 📊 Revenue Reports (sales, income, expenses, best-selling books, employee sales)
+- Sách
+- Kho hàng
+- Đơn hàng (Bán sách)
+- Báo cáo Doanh thu (doanh số, thu nhập, chi phí, sách bán chạy, doanh số nhân viên)
 
 ---
 
-# 🧱 Tech Stack
+# Công nghệ sử dụng
 
-| Part | Technology |
+| Phần | Công nghệ |
 |------|------------|
-| **Backend** | Node.js, Express, TypeScript, Prisma ORM, PostgreSQL (Neon), Multer (Image Upload) |
+| **Backend** | Node.js, Express, TypeScript, Prisma ORM, PostgreSQL (Neon), Multer (Upload ảnh) |
 | **Frontend** | React, TypeScript, Vite, Recharts |
 
-Project structure:
+Cấu trúc dự án:
 
 ```text
 Book-Store/
-├── Backend/      # REST API (Port 3000)
-└── Frontend/     # Web App (Port 5173)
+├── Backend/      # REST API (Cổng 3000)
+└── Frontend/     # Ứng dụng Web (Cổng 5173)
 ```
 
 ---
 
-# ✅ Requirements
+# Yêu cầu
 
-Before running the project, make sure you have:
+Trước khi chạy dự án, hãy đảm bảo bạn có:
 
-- **Node.js 18 or newer** (Node.js 20+ is recommended)
+- **Node.js 18 trở lên** (khuyến nghị Node.js 20+)
 
-Check your version:
+Kiểm tra phiên bản:
 
 ```bash
 node -v
 ```
 
-- A **PostgreSQL database on Neon**
+- Một **cơ sở dữ liệu PostgreSQL trên Neon**
 
-This project uses the Neon serverless adapter (`@prisma/adapter-neon`), so you need a Neon database instead of a local PostgreSQL database.
+Dự án này sử dụng adapter serverless của Neon (`@prisma/adapter-neon`), vì vậy bạn cần một cơ sở dữ liệu Neon thay vì PostgreSQL cài đặt cục bộ.
 
-Create a free database:
+Tạo cơ sở dữ liệu miễn phí tại:
 
 https://neon.tech
 
-After creating a project, copy the connection string. It looks like this:
+Sau khi tạo project, sao chép chuỗi kết nối. Chuỗi kết nối có dạng như sau:
 
 ```text
-postgresql://user:password@xxxxx.neon.tech/database?sslmode=require
+postgresql://neondb_owner:npg_BO0Js9fKnSuR@ep-calm-hat-aobv7b4y-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 ---
 
-# 🚀 How to Run the Project
+# Cách chạy dự án
 
-Open **two terminal windows**.
+Mở **hai cửa sổ terminal**.
 
-One terminal runs the backend.
+Một terminal chạy backend.
 
-The other runs the frontend.
+Terminal còn lại chạy frontend.
 
 ---
 
-## 1. Start the Backend
+## 1. Khởi động Backend
 
-Go to the Backend folder:
+Di chuyển vào thư mục Backend:
 
 ```bash
 cd Backend
 ```
 
-Install packages:
+Cài đặt các package:
 
 ```bash
 npm install
 ```
 
-Start the development server:
+Khởi động server ở chế độ development:
 
 ```bash
 npm run dev
 ```
 
-The API will run at:
+API sẽ chạy tại:
 
 ```
 http://localhost:3000
@@ -94,29 +94,29 @@ http://localhost:3000
 
 ---
 
-## 2. Start the Frontend
+## 2. Khởi động Frontend
 
-Open another terminal.
+Mở một terminal khác.
 
-Go to the Frontend folder:
+Di chuyển vào thư mục Frontend:
 
 ```bash
 cd Frontend
 ```
 
-Install packages:
+Cài đặt các package:
 
 ```bash
 npm install
 ```
 
-Start the development server:
+Khởi động server ở chế độ development:
 
 ```bash
 npm run dev
 ```
 
-Open your browser:
+Mở trình duyệt:
 
 ```
 http://localhost:5173
@@ -126,137 +126,137 @@ http://localhost:5173
 
 ### Vite Proxy
 
-The frontend is already configured to proxy:
+Frontend đã được cấu hình sẵn để proxy:
 
 - `/api`
 - `/uploads`
 
-to
+đến
 
 ```
 http://localhost:3000
 ```
 
-Because of this, you **do not need to configure CORS**.
+Nhờ đó, bạn **không cần cấu hình CORS**.
 
 ---
 
-# 🌱 Seed Sample Data (Optional)
+# Tạo dữ liệu mẫu (Tùy chọn)
 
-A new database is empty.
+Cơ sở dữ liệu mới sẽ trống.
 
-You can add sample data by running these commands inside the **Backend** folder.
+Bạn có thể thêm dữ liệu mẫu bằng cách chạy các lệnh sau trong thư mục **Backend**.
 
-Create sample employees:
+Tạo nhân viên mẫu:
 
 ```bash
 npx tsx prisma/seed-nv.ts
 ```
 
-Create sample inventory:
+Tạo dữ liệu kho mẫu:
 
 ```bash
 npx tsx prisma/seed-kho.ts
 ```
 
-These scripts are safe to run multiple times.
+Các script này có thể chạy nhiều lần một cách an toàn.
 
 ---
 
-## Create Data Manually
+## Tạo dữ liệu thủ công
 
-You can also use the web interface.
+Bạn cũng có thể sử dụng giao diện web.
 
-Recommended order:
+Thứ tự khuyến nghị:
 
-1. **Books**
-   - Click **Add Book**
-   - Enter book information
-   - Upload a cover image
-   - Set the initial stock
+1. **Sách**
+   - Nhấn **Thêm sách**
+   - Nhập thông tin sách
+   - Tải lên ảnh bìa
+   - Đặt số lượng tồn kho ban đầu
 
-2. **Inventory**
-   - Open Inventory
-   - Click **View Details**
-   - Add stock
-   - Choose shelf location
+2. **Kho hàng**
+   - Mở trang Kho hàng
+   - Nhấn **Xem chi tiết**
+   - Thêm hàng vào kho
+   - Chọn vị trí kệ
 
-3. **Orders**
-   - Create a new order
-   - Select books
-   - Enter quantity
-   - Choose an employee
-   - Submit the order
+3. **Đơn hàng**
+   - Tạo đơn hàng mới
+   - Chọn sách
+   - Nhập số lượng
+   - Chọn nhân viên
+   - Xác nhận đơn hàng
 
-4. **Revenue**
-   - Select a start date
-   - Select an end date
-   - Click **Confirm**
-   - View the reports
+4. **Doanh thu**
+   - Chọn ngày bắt đầu
+   - Chọn ngày kết thúc
+   - Nhấn **Xác nhận**
+   - Xem báo cáo
 
 ---
 
-# 📜 Useful Commands
+# Các lệnh hữu ích
 
 ## Backend
 
-| Command | Description |
+| Lệnh | Mô tả |
 |----------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build the project |
-| `npm start` | Run the production build |
-| `npx prisma db push` | Update database schema |
-| `npx prisma generate` | Generate Prisma Client |
-| `npx prisma studio` | Open Prisma Studio |
+| `npm run dev` | Khởi động server development |
+| `npm run build` | Build dự án |
+| `npm start` | Chạy bản build production |
+| `npx prisma db push` | Cập nhật schema cơ sở dữ liệu |
+| `npx prisma generate` | Tạo Prisma Client |
+| `npx prisma studio` | Mở Prisma Studio |
 
 ---
 
 ## Frontend
 
-| Command | Description |
+| Lệnh | Mô tả |
 |----------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build the frontend |
-| `npm run preview` | Preview the production build |
+| `npm run dev` | Khởi động server development |
+| `npm run build` | Build frontend |
+| `npm run preview` | Xem trước bản build production |
 
 ---
 
-# 🛠️ Troubleshooting
+# Xử lý sự cố
 
-### Backend is not running
+### Backend không chạy
 
-If you see:
+Nếu bạn thấy:
 
 - `ERR_CONNECTION_REFUSED`
-- API errors
-- Cannot connect to the server
+- Lỗi API
+- Không thể kết nối đến server
 
-Start the backend:
+Hãy khởi động backend:
 
 ```bash
 cd Backend
 npm run dev
 ```
 
-The frontend needs the backend to run.
+Frontend cần backend đang chạy để hoạt động.
 
 ---
 
-### Database error
+### Lỗi cơ sở dữ liệu
 
-If you see database errors or `DATABASE_URL` errors:
+Nếu bạn thấy lỗi cơ sở dữ liệu hoặc lỗi `DATABASE_URL`:
 
-1. Check `Backend/.env`
+1. Kiểm tra file `Backend/.env`
 
-2. Make sure `DATABASE_URL` contains your Neon connection string.
+2. Đảm bảo `DATABASE_URL` chứa chuỗi kết nối Neon của bạn.
 
-3. Run:
+3. Chạy:
 
 ```bash
 npx prisma db push
 ```
 
-Then:
+Sau đó:
 
 ```bash
 npx prisma generate
@@ -264,15 +264,15 @@ npx prisma generate
 
 ---
 
-### New database changes are not working
+### Thay đổi cơ sở dữ liệu mới không hoạt động
 
-If you pull new code or change the Prisma schema:
+Nếu bạn pull code mới hoặc thay đổi schema Prisma:
 
 ```bash
 npx prisma generate
 ```
 
-Then restart the backend:
+Sau đó khởi động lại backend:
 
 ```bash
 npm run dev
@@ -280,9 +280,9 @@ npm run dev
 
 ---
 
-### Employee list is empty
+### Danh sách nhân viên trống
 
-If you cannot create orders or add inventory because no employees appear:
+Nếu bạn không thể tạo đơn hàng hoặc nhập kho vì không có nhân viên nào hiển thị:
 
 ```bash
 npx tsx prisma/seed-nv.ts
@@ -290,24 +290,24 @@ npx tsx prisma/seed-nv.ts
 
 ---
 
-### Revenue or Orders show no data
+### Doanh thu hoặc Đơn hàng không có dữ liệu
 
-- In the **Orders** page, open the **View Orders** tab.
-- In the **Revenue** page, choose a valid date range and click **Confirm**.
+- Ở trang **Đơn hàng**, mở tab **Xem đơn hàng**.
+- Ở trang **Doanh thu**, chọn khoảng ngày hợp lệ và nhấn **Xác nhận**.
 
 ---
 
-# 📌 Notes
+# Lưu ý
 
-- Do **not** upload `Backend/.env` to GitHub.
-- Add `.env` to your `.gitignore` file.
-- Book cover images are stored in:
+- **Không** upload file `Backend/.env` lên GitHub.
+- Thêm `.env` vào file `.gitignore`.
+- Ảnh bìa sách được lưu tại:
 
 ```text
 Backend/uploads/
 ```
 
-They are available from:
+Có thể truy cập ảnh qua đường dẫn:
 
 ```text
 /uploads/filename
@@ -315,9 +315,9 @@ They are available from:
 
 ---
 
-# 👨‍💻 Author
+# Tác giả
 
-This project was created for learning full-stack web development using:
+Dự án này được tạo ra để học phát triển web full-stack với:
 
 - Node.js
 - Express
@@ -326,4 +326,3 @@ This project was created for learning full-stack web development using:
 - PostgreSQL (Neon)
 - React
 - Vite
-```
